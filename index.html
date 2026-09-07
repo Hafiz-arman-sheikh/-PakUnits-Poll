@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Administrative Units Opinion Poll</title>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-logo">🇵🇰 PakUnits Poll</div>
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">Stats</a></li>
+        <li><a href="#map">Proposed Map</a></li>
+        <li><a href="#faide">Potential Faide</a></li>
+        <li><a href="#vote">Vote Now</a></li>
+    </ul>
+    <button class="admin-btn" onclick="openAdminPanel()">🔒 Admin Dashboard</button>
+</nav>
+
+<div class="container" id="home">
+    <header>
+        <h1>🇵🇰 Naye Intezami Units (Provinces) Re-referendum</h1>
+        <p>Aap ki raye, aap ka haq — Data ki roshni me apna faisla darj karein</p>
+    </header>
+
+    <!-- Live Countdown Timer -->
+    <div class="timer-card">
+        <h3 id="timerHeader">⏳ Voting Closing Time Countdown (Target: 20 Nov 2026)</h3>
+        <div class="timer-display">
+            <div class="time-box"><span id="days">00</span><label>Days</label></div>
+            <div class="time-box"><span id="hours">00</span><label>Hours</label></div>
+            <div class="time-box"><span id="minutes">00</span><label>Minutes</label></div>
+            <div class="time-box"><span id="seconds">00</span><label>Seconds</label></div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <h2>
+            <span>👑 Admin Exclusive Overall Summary</span>
+            <button onclick="closeAdminPanel()" style="background:none; border:none; color:#fff; cursor:pointer; font-size:1.2rem;">✖</button>
+        </h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Ye overall aggregated percentage sirf Admin Panel me nazar aayegi:</p>
+        
+        <div class="admin-stats-grid">
+            <div class="admin-stat-box">
+                <h4>Total Votes Cast</h4>
+                <div class="val" id="adminTotalVotes" style="color: var(--text-light);">0</div>
+            </div>
+            <div class="admin-stat-box">
+                <h4>Overall Haan (In Favor)</h4>
+                <div class="val" id="adminYesPercent" style="color: var(--accent-green);">0%</div>
+            </div>
+            <div class="admin-stat-box">
+                <h4>Overall Naa (Against)</h4>
+                <div class="val" id="adminNoPercent" style="color: var(--danger);">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- History & Data Stats -->
+    <div class="stats-grid" id="about">
+        <div class="stat-card">
+            <h3>Abadi (Population)</h3>
+            <div class="stat-value">1947: ~33.7M ➔ Aaj: ~245M+</div>
+            <div class="stat-desc">Mulki abadi me 7 guna izafa ho chuka hai lekin intezami dhaanchna wahi purana hai.</div>
+        </div>
+        <div class="stat-card">
+            <h3>Currency Value (USD/PKR)</h3>
+            <div class="stat-value">1947: $1 = Rs 3.30 ➔ Aaj: $1 ≈ Rs 280+</div>
+            <div class="stat-desc">Mashi sthiti aur currency ki qadar me numayan tabdeeli.</div>
+        </div>
+        <div class="stat-card debt">
+            <h3>Mulki Qarza & Per Citizen Debt</h3>
+            <div class="stat-value">Qarza: ~75+ Trillion PKR</div>
+            <div class="stat-desc">Har Pakistani par taqreeban <b>300,000 PKR</b> ka qarza banta hai.</div>
+        </div>
+    </div>
+
+    <!-- Proposed Map Section -->
+    <div class="map-section" id="map">
+        <h2>Pakistan Proposed New Administrative Units Map</h2>
+        <p style="color: var(--text-muted); margin-bottom: 15px;">Proposed 28th Amendment / Administrative Reorganization Framework</p>
+        <div class="map-container">
+            <img src="map/map.jfif" alt="Pakistan Proposed Administrative Map">
+        </div>
+    </div>
+
+    <!-- Potential Faide Section -->
+    <div class="info-section" id="faide">
+        <h2>Naye Intezami Units Ke Potential Faide</h2>
+        <div class="benefits-list">
+            <div class="benefit-item">
+                <strong>1. Behtar Governance</strong>
+                Awaam ko apne masail ke hal ke liye door-daraz dar-ul-hukoomat nahi jana parega.
+            </div>
+            <div class="benefit-item">
+                <strong>2. Insafana Wasail (NFC Award)</strong>
+                Budget seedha har ilaqay tak pohnchega aur jagirdarana qabza kam hoga.
+            </div>
+            <div class="benefit-item">
+                <strong>3. Rozgar & Tarakki</strong>
+                Naye Secretariat, High Courts aur Adaron ke banne se lakho rozgar ke mauqe paida honge.
+            </div>
+            <div class="benefit-item">
+                <strong>4. Muqami Qayadat</strong>
+                Aam gharano ke talib-e-ilm aur naujawan siyasat me aage aa sakenge.
+            </div>
+        </div>
+    </div>
+
+    <!-- Voting Section -->
+    <div class="poll-container" id="vote">
+        <div class="poll-form">
+            <h2>Apni Raye Record Karein</h2>
+            <br>
+            <form id="voteForm" onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label for="userName">Aap ka Naam:</label>
+                    <input type="text" id="userName" placeholder="Naam likhein..." required>
+                </div>
+                <div class="form-group">
+                    <label for="ethnicityInput">Aap ki Shanakht / Zuban:</label>
+                    <input type="text" id="ethnicityInput" list="languagesList" placeholder="Zuban search / select karein..." required>
+                    
+                    <datalist id="languagesList">
+                        <option value="Sindhi">Sindhi</option>
+                        <option value="Punjabi">Punjabi</option>
+                        <option value="Pashtun">Pashtun</option>
+                        <option value="Balochi">Balochi</option>
+                        <option value="Muhajir">Muhajir</option>
+                        <option value="Saraiki">Saraiki</option>
+                        <option value="Gilgiti / Balti">Gilgiti / Balti</option>
+                        <option value="Kashmiri">Kashmiri</option>
+                        <option value="Hindko">Hindko</option>
+                        <option value="Brahui">Brahui</option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <label>Kya Pakistan me naye Intezami Units banne chahiye?</label>
+                    <div class="vote-btn-group">
+                        <button type="button" class="btn-vote btn-yes" id="btnYes" onclick="submitVote('YES')">Haan (In Favor)</button>
+                        <button type="button" class="btn-vote btn-no" id="btnNo" onclick="submitVote('NO')">Nahi (Against)</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="poll-results">
+            <h2>Ethnicity-wise Live Breakdown</h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;">
+                (Public Detailed Results)
+            </p>
+            <div id="resultsContainer"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    Designed & Developed by <b>Arman</b> | Pakistan Administrative Reform Initiative
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
